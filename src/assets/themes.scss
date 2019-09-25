@@ -1,0 +1,7 @@
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+
+$nb-themes: nb-register-theme((
+  user-name-text-color: white, // <- we setting color-basic-800 instead of color-basic-1000
+
+), default, default);
