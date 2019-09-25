@@ -21,6 +21,8 @@ import {
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  PerfilCardComponent
+  
 } from './components';
 import {
   CapitalizePipe,
@@ -61,6 +63,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  PerfilCardComponent
 ];
 const PIPES = [
   CapitalizePipe,

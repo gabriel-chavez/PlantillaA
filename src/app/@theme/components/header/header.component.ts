@@ -4,7 +4,7 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, pipe } from 'rxjs';
 
 @Component({
   selector: 'ngx-header',
@@ -82,8 +82,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
+  
     this.layoutService.changeLayoutSize();
-
+    
     return false;
   }
 
