@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'ngx-footer',
   styleUrls: ['./footer.component.scss'],
   template: `
-    <span class="created-by">© 2019 - Seguros y Reaseguros Personales UNIVIDA S. A.</span>
+    <span class="created-by">© 2019 - Banco de desarrollo productivo.</span>
 
   `,
 })
