@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService, NbDialogService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-
+  tituloModal:string="";
   themes = [
     {
       value: 'default',
@@ -45,7 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private dialogService: NbDialogService) {
   }
 
   ngOnInit() {
@@ -91,5 +92,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  abrirModal(dialog: TemplateRef<any>,tituloModal:string) {    
+    this.tituloModal=tituloModal;
+    let contenido:string;
+    if(tituloModal=="Contacto"){
+      contenido=`
+      <div class="container">     
+          <p>Cualquier duda y/o sugerencia contactese con nosotros.</p>
+          <div><b>Marcelo Pinto</b></div>
+          <div><small>Subgerente Nacional de Tecnologías de Información</small> </div>
+          <div><small><a href="mailto:mpinto@univida.bo">mpinto@univida.bo</a></small></div>
+          <br>
+          <div><b>Roy Sillerico</b></div>
+          <div><small>Jefe Nacional de Desarrollo de Sistemas</small> </div>
+          <div><small><a href="mailto:rsillerico@univida.bo">rsillerico@univida.bo</a></small></div>      
+      </div>      
+      `
+    }
+    else{
+      contenido=`
+      <div class="container">
+        UNIVidaNet es la Plataforma Informática Única de UNIVida.
+      </div>
+      `
+    }
+    this.dialogService.open(
+      dialog,
+      { context: contenido,closeOnEsc: true, closeOnBackdropClick: false,});
   }
 }
