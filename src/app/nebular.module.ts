@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import {
-  
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
@@ -11,6 +10,8 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbLayoutModule,
+  NbAlertModule,
 } from '@nebular/theme';
 import { ThemeModule } from './@theme/theme.module';
 const NEBULAR_COMPONENTS = [
@@ -24,6 +25,8 @@ const NEBULAR_COMPONENTS = [
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbLayoutModule,
+  NbAlertModule
 ]
 @NgModule({
   imports: [    

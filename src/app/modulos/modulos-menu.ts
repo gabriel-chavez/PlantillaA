@@ -6,50 +6,39 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Proveedores',
+    title: 'Auxiliar SOAT',
     icon: 'people-outline',
-    children: [
+    children: [  
       {
-        title: 'Nuevo Proveedor',
-        link: '/modulos/proveedores/nuevo',
-      },
-      {
-        title: 'Lista de Proveedores',
+        title: 'Venta y anexo de SOAT',
         link: '/modulos/proveedores/lista',
-      },      
+        children: [
+          {
+            title: 'Venta Nueva',
+            link: '/pages/layout/stepper',
+          },
+          {
+            title: 'Ventas Realizadas',
+            link: '/pages/layout/list',
+          },          
+        ],
+      }, 
+      {
+        title: 'RCV SOAT',
+        link: '/modulos/proveedores/lista',
+        children: [
+          {
+            title: 'Nuevo',
+            link: '/pages/layout/stepper',
+          },
+          {
+            title: 'Realizados',
+            link: '/pages/layout/list',
+          },          
+        ],
+      },   
     ],
   },
-  {
-    title: 'Pagos',
-    icon: 'archive-outline',
-    children: [
-      {
-        title: 'Registro de pagos',
-        link: '/pages/layout/stepper',
-      },
-      {
-        title: 'Reporte de pagos',
-        link: '/pages/layout/list',
-      },      
-    ],
-  },
-
-  {
-    title: 'Admin',
-    icon: 'person-outline',   
-    children: [
-      {
-        title: 'Nuevo usuario',
-        link: '/pages/ui-features/grid',
-      },
-      {
-        title: 'Lista de usuarios',
-        link: '/pages/ui-features/icons',
-      },
-      {
-        title: 'Permisos',
-        link: '/pages/ui-features/typography',
-      },     
-    ],
-  },
+  
+  
 ];

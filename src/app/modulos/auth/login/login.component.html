@@ -8,20 +8,21 @@
                             <img src="assets/images/logo.jpg" alt="logo">
                         </nb-card-header>
                         <nb-card-body>
-                            <form class="container">
+                            <form class="container" [formGroup]="inicioSesionForm" (ngSubmit)="iniciarSesion()" novalidate autocomplete="off">
                                 <div class="form-group">
                                     <label for="inputUsuario" class="label">Usuario</label>
-                                    <input type="text" nbInput fullWidth id="inputUsuario" placeholder="Escriba su usuario">
+                                    <input type="text" nbInput fullWidth id="inputUsuario" placeholder="Escriba su usuario" formControlName="usuario">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword1" class="label">Contraseña</label>
-                                    <input type="password" nbInput fullWidth id="inputPassword1" placeholder="Escriba su contraseña">
+                                    <input type="password" nbInput fullWidth id="inputPassword1" placeholder="Escriba su contraseña" formControlName="contrasena">
                                 </div>
-
-                                <button type="submit" nbButton shape="round" class="btn btn-block mt-4 mb-4">
+                                <nb-alert status="danger" *ngIf="mostrarAlerta && inicioSesionForm.pristine" class="text-center mt-5 animated bounce faster">
+                                    {{respuesta.Mensaje}}
+                                </nb-alert>
+                                <button type="submit" nbButton shape="round" class="btn btn-block mt-4 mb-4" [disabled]="inicioSesionForm.invalid">
                                         Iniciar Sesión
                                 </button>
-
                             </form>
                         </nb-card-body>
                     </nb-card>

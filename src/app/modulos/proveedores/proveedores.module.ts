@@ -8,10 +8,14 @@ import { NebularModule } from '../../nebular.module';
 
 @NgModule({
 
-  imports: [   
-  ProveedoresRoutingModule,
+  imports: [
+    ProveedoresRoutingModule,
     NebularModule
   ],
-  declarations: [ProveedoresComponent,NuevoComponent, ListaComponent]
+  declarations: [
+    ProveedoresComponent, 
+    NuevoComponent, 
+    ListaComponent
+  ]
 })
 export class ProveedoresModule { }

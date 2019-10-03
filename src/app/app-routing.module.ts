@@ -11,6 +11,7 @@ import {
 
 //import { AUTH_ROUTES } from './modulos/auth/auth-routing.module';
 import { AuthComponent } from './modulos/auth/auth.component';
+import { ValidarAutenticacion } from './guards/validar-autenticacion.guard';
 
 
 const routes: Routes = [
@@ -18,11 +19,13 @@ const routes: Routes = [
     path: 'pages',
     loadChildren: () => import('app/pages/pages.module')
       .then(m => m.PagesModule),
+      canActivate: [ValidarAutenticacion] 
   },
   {
     path: 'modulos',
     loadChildren: () => import('app/modulos/modulos.module')
-      .then(m => m.ModulosModule),
+      .then(m => m.ModulosModule), 
+      canActivate: [ValidarAutenticacion] 
   },
   {
     path: 'auth',

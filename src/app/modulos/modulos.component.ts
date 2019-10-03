@@ -6,7 +6,7 @@ import { MENU_ITEMS } from './modulos-menu';
   styleUrls: ['./modulos.component.scss'],
   template: `
   <ngx-one-column-layout>
-    <nb-menu [items]="menu"></nb-menu>
+    <nb-menu [items]="menu" autoCollapse="true"></nb-menu>
     <router-outlet></router-outlet>
   </ngx-one-column-layout>
   `,

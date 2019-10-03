@@ -5,6 +5,8 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, pipe } from 'rxjs';
+import { LoginService } from '../../../servicios/auth/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -16,7 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-  tituloModal:string="";
+  tituloModal: string = "";
   themes = [
     {
       value: 'default',
@@ -38,16 +40,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Cambiar contraseña' }, { title: 'Cerrar sesion' } ];
+  userMenu = [{ title: 'Cambiar contraseña' }, { title: 'Cerrar sesion' }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService,
-              private dialogService: NbDialogService) {
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService,
+    private dialogService: NbDialogService,
+    private loginService: LoginService,
+    private router:Router
+    ) {
   }
+
+
+
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
@@ -70,7 +78,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+      /*********/
+      this.menuService.onItemClick().subscribe(( event ) => {
+        this.onItemSelection(event.item.title);
+      })
   }
+  
+  onItemSelection(title) {
+    if ( title === 'Cerrar sesion' ) {      
+      this.cerrarSesion()      
+    } 
+  }
+
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -83,9 +102,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
-  
+
     this.layoutService.changeLayoutSize();
-    
+
     return false;
   }
 
@@ -94,11 +113,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  abrirModal(dialog: TemplateRef<any>,tituloModal:string) {    
-    this.tituloModal=tituloModal;
-    let contenido:string;
-    if(tituloModal=="Contacto"){
-      contenido=`
+  abrirModal(dialog: TemplateRef<any>, tituloModal: string) {
+    this.tituloModal = tituloModal;
+    let contenido: string;
+    if (tituloModal == "Contacto") {
+      contenido = `
       <div class="container">     
           <p>Cualquier duda y/o sugerencia contactese con nosotros.</p>
           <div><b>Marcelo Pinto</b></div>
@@ -111,8 +130,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       </div>      
       `
     }
-    else{
-      contenido=`
+    else {
+      contenido = `
       <div class="container">
         UNIVidaNet es la Plataforma Informática Única de UNIVida.
       </div>
@@ -120,6 +139,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     this.dialogService.open(
       dialog,
-      { context: contenido,closeOnEsc: true, closeOnBackdropClick: false,});
+      { context: contenido, closeOnEsc: true, closeOnBackdropClick: false, });
+  }
+  cerrarSesion() {
+    this.loginService.cerrarSesion();
+    this.router.navigate(['/auth/login']);
   }
 }
