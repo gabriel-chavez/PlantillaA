@@ -11,29 +11,29 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [  
       {
         title: 'Venta y anexo de SOAT',
-        link: '/modulos/proveedores/lista',
+     //   link: '/modulos/auxiliar-soat',
         children: [
           {
             title: 'Venta Nueva',
-            link: '/pages/layout/stepper',
+            link: '/modulos/auxiliar-soat/venta-anexo-soat/venta-nueva',
           },
           {
             title: 'Ventas Realizadas',
-            link: '/pages/layout/list',
+            link: '/modulos/auxiliar-soat/venta-anexo-soat/ventas-realizadas',
           },          
         ],
       }, 
       {
-        title: 'RCV SOAT',
-        link: '/modulos/proveedores/lista',
+        title: 'Rcv SOAT',
+       // link: '/modulos/auxiliar-soat',
         children: [
           {
             title: 'Nuevo',
-            link: '/pages/layout/stepper',
+            link: '/modulos/auxiliar-soat/rcv-soat/nuevo',
           },
           {
             title: 'Realizados',
-            link: '/pages/layout/list',
+            link: '/modulos/auxiliar-soat/rcv-soat/realizados',
           },          
         ],
       },   

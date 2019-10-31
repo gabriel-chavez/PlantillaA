@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators'
 import { environment } from '../../../environments/environment';
 import { RespuestaBase } from '../../modelos/genericos/respuesta-base.model';
 import { Token } from '../../modelos/genericos/token.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,70 +13,62 @@ import { Token } from '../../modelos/genericos/token.model';
 })
 export class LoginService {
     private url: string;
-    public tokenUsuario: string;
-    public codigoActualizacionUsuario: number;
-
+    private currentUserSubject: BehaviorSubject<Token>;
+    public currentUser: Observable<Token>;
     constructor(private http: HttpClient) {
         this.url = environment.servicioAutenticacionUrl;
-        this.leerToken();
+        this.currentUserSubject = new BehaviorSubject<Token>(JSON.parse(sessionStorage.getItem('tokenUsuario')));
+        this.currentUser = this.currentUserSubject.asObservable();
     }
-    cerrarSesion() {
-        sessionStorage.removeItem('tokenUsuario');
-        sessionStorage.removeItem('codigoActualizacionUsuario');
-        sessionStorage.removeItem('expira');
-        console.log("cerrar sesion")
+    public get currentUserValue(): Token {
+        return this.currentUserSubject.value;
     }
-    iniciarSesion(nombreUsuario: string, contraseña: string) {
+    iniciarSesion(nombreUsuario: string, contrasena: string) {
 
         const credenciales = {
             usuario: nombreUsuario,
-            contraseña: contraseña,
-            codigosistema: "028"
+            contraseña: contrasena,
+            codigosistema: "000"
         }
         const httpOpciones = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Accept': '*/*'
             })
-        }        
+        }
         return this.http.post<any>(
             `${this.url}autenticar`, JSON.stringify(credenciales), httpOpciones)
             .pipe(
-                map((respuestaBase: RespuestaBase) => {                    
-                    let token: Token = JSON.parse(respuestaBase.Resultado);                    
-                    this.guardarToken(token);
+                map((respuestaBase: RespuestaBase) => {
+                    console.log(respuestaBase)
+                    if (respuestaBase.exito) {
+                        let token: Token = JSON.parse(respuestaBase.resultado);
+                        this.guardarToken(token);
+                        this.currentUserSubject.next(token);
+                    }
+
                     return respuestaBase;
                 })
             );
     }
+    cerrarSesion() {
+        sessionStorage.removeItem('tokenUsuario');
+        sessionStorage.removeItem('expira');
+        this.currentUserSubject.next(null);
+        console.log("cerrar sesion")
+    }
+    private guardarToken(token: Token) {
 
-    private guardarToken(token:Token) {
-        this.tokenUsuario = token.TokenAcceso;
-        this.codigoActualizacionUsuario = token.CodigoActualizacion;
-        sessionStorage.setItem('tokenUsuario', token.TokenAcceso);
-        sessionStorage.setItem('codigoActualizacionUsuario', token.CodigoActualizacion.toString());
+        sessionStorage.setItem('tokenUsuario', JSON.stringify(token));
+        //expiracion (temporal)
         let hoy = new Date();
-        hoy.setSeconds(3600); //podriamos obtener el dato del resp
+        hoy.setSeconds(3600);
         sessionStorage.setItem('expira', hoy.getTime().toString());
         console.log('Token almacenado')
     }
-    private leerToken() {
-        if (sessionStorage.getItem('tokenUsuario')) {
-            this.tokenUsuario = sessionStorage.getItem('tokenUsuario')
-        }
-        else {
-            this.tokenUsuario = '';
-        }
-        if (sessionStorage.getItem('codigoActualizacionUsuario')) {
-            this.codigoActualizacionUsuario = Number(sessionStorage.getItem('codigoActualizacionUsuario'))
-        }
-        else {
-            this.codigoActualizacionUsuario = 0;
-        }
-    }
     public estaAtutenticado(): boolean {
-        //TEMPORAL
-        if (this.tokenUsuario.length < 2)
+        //TEMPORAL        
+        if (!this.currentUserValue)
             return false
         const expira = Number(sessionStorage.getItem('expira'));
         const expiraDate = new Date();
@@ -86,5 +79,26 @@ export class LoginService {
         else {
             return false
         }
+    }
+    cambiarContrasena(nombreUsuario: string, contrasena: string,contrasenaNueva: string) {
+        const credenciales = {
+            codigosistema: "000",
+            usuario: nombreUsuario,
+            contraseña: contrasena,
+            contraseñaNueva: contrasenaNueva
+        }
+        const httpOpciones = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            })
+        }
+        return this.http.post<any>(
+            `${this.url}cambiarclave`, JSON.stringify(credenciales), httpOpciones)
+            .pipe(
+                map((respuestaBase: RespuestaBase) => {                     
+                    return respuestaBase;
+                })
+            );
     }
 }

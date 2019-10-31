@@ -1,13 +1,13 @@
 export class RespuestaBase {
-    Mensaje: string;
-    Exito: boolean;
-    Resultado: string;
-    CodigoError: number;
-    OrdenRetorno: number;
-    Excepcion: string;
+    mensaje: string;
+    exito: boolean;
+    resultado: string;
+    codigoError: number;
+    ordenRetorno: number;
+    excepcion: string;
     constructor(){
-      this.Mensaje='';
-      this.Exito=false;      
+      this.mensaje='';
+      this.exito=false;      
     }
   }
   

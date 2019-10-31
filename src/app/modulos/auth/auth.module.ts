@@ -7,17 +7,24 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NebularModule } from '../../nebular.module';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
+import { VariosModule } from '../varios/varios.module';
+
 
 @NgModule({
     imports: [
         AuthRoutingModule,
         NebularModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        VariosModule
     ],
     declarations: [
         AuthComponent,
-        LoginComponent
+        LoginComponent,
+        CambiarContrasenaComponent,
+        
+
     ],
 
 })

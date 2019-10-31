@@ -6,7 +6,9 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, pipe } from 'rxjs';
 import { LoginService } from '../../../servicios/auth/login.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UsuarioService } from '../../../servicios/generico/usuario.service';
+import { Usuario } from '../../../modelos/genericos/usuario.model';
 
 @Component({
   selector: 'ngx-header',
@@ -17,26 +19,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
+  datosUsuario: Usuario;
   tituloModal: string = "";
-  themes = [
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-  ];
+
 
   currentTheme = 'default';
 
@@ -45,24 +30,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private dialogService: NbDialogService,
     private loginService: LoginService,
-    private router:Router
-    ) {
+    private router: Router,   
+    private usuarioService: UsuarioService
+  ) {
   }
-
 
 
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+    this.usuarioService.obtenerDatosUsuario().subscribe((data: Usuario) => {
+      this.datosUsuario = data;
+    });
+
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -78,16 +63,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
-      /*********/
-      this.menuService.onItemClick().subscribe(( event ) => {
-        this.onItemSelection(event.item.title);
-      })
+    /*********/
+    this.menuService.onItemClick().subscribe((event) => {
+      this.onItemSelection(event.item.title);
+    })
   }
-  
+
   onItemSelection(title) {
-    if ( title === 'Cerrar sesion' ) {      
-      this.cerrarSesion()      
-    } 
+    if (title === 'Cerrar sesion') {
+      this.cerrarSesion()
+    }
+    if (title === 'Cambiar contraseña') {
+      let rutaActual=encodeURI(this.router.url);     
+      this.router.navigate(['/auth/cambiar-contrasena'], { queryParams: {ruta: rutaActual}});
+    }
   }
 
 
@@ -96,9 +85,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  changeTheme(themeName: string) {
-    this.themeService.changeTheme(themeName);
-  }
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
@@ -108,10 +94,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  navigateHome() {
-    this.menuService.navigateHome();
-    return false;
-  }
+
 
   abrirModal(dialog: TemplateRef<any>, tituloModal: string) {
     this.tituloModal = tituloModal;

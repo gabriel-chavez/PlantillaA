@@ -5,28 +5,34 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
-  NbDatepickerModule, NbIconModule,
+  NbDatepickerModule, 
+  NbIconModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
   NbLayoutModule,
   NbAlertModule,
+  NbContextMenuModule
 } from '@nebular/theme';
 import { ThemeModule } from './@theme/theme.module';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 const NEBULAR_COMPONENTS = [
   ThemeModule,
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
-  NbDatepickerModule, NbIconModule,
+  NbDatepickerModule, 
+  NbIconModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
   NbLayoutModule,
-  NbAlertModule
+  NbAlertModule,
+  Ng2SmartTableModule,
+  NbContextMenuModule
 ]
 @NgModule({
   imports: [    

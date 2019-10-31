@@ -5,16 +5,17 @@ import { NoEncontradoComponent } from './varios/no-encontrado/no-encontrado.comp
 const routes: Routes = [{
   path: '',
   component: ModulosComponent,
-  children: [   
+  children: [      
     {
-      path: 'proveedores',
-      loadChildren: () => import('./proveedores/proveedores.module')
-        .then(m => m.ProveedoresModule),
-    },
+      path: 'auxiliar-soat',
+      loadChildren: () => import('./auxiliar-soat/auxiliar-soat.module')
+        .then(m => m.AuxiliarSoatModule),
+    },    
     {
       path: '**',
       component: NoEncontradoComponent,
     },
+    
   ],
 }];
 

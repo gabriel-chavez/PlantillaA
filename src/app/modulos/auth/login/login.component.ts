@@ -39,20 +39,34 @@ export class LoginComponent {
         .pipe(first())
         .subscribe(
           (data: RespuestaBase) => {
-            this.redireccionar();
-            this.respuesta = data;
-          }, (respuestaError) => {
+            this.respuesta = data;            
+            if (this.respuesta.exito) {
+              this.redireccionar();
+            } else {
+              this.inicioSesionForm.setValue({
+                usuario: usr,
+                contrasena: pas
+              });
+              this.mostrarAlerta = true;
+            }
+
+
+          }
+          , (respuestaError) => {
             this.respuesta = respuestaError.error;
             this.inicioSesionForm.setValue({
               usuario: usr,
               contrasena: pas
             });
             this.mostrarAlerta = true;
-          });
+          }
+          );
     }
   }
-  redireccionar(){
-    if(this.loginService.estaAtutenticado())      
-      this.router.navigate(['/modulos/proveedor']);    
+  redireccionar() {
+    
+    if (this.loginService.estaAtutenticado)
+      console.log("redireccionar")
+    this.router.navigate(['/modulos']);
   }
 }

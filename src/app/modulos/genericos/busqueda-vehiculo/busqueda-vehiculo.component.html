@@ -1,0 +1,59 @@
+<nb-card status="info" class="inline-form-card">
+    <nb-card-header>Busqueda de vehículo</nb-card-header>
+    <nb-card-body>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-10">
+                <form class="form-inline">
+                    <div class="col-md-3">
+                        <nb-select fullWidth placeholder="Tipo de búsqueda" [(selected)]="criterioBusqueda">
+                            <nb-option [value]="item.secuencial" *ngFor="let item of criteriosBusqueda">{{item.descripcion}}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" nbInput fullWidth [placeholder]="placeHolderDescripcionBusqueda()">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" nbButton status="info" class="btn-block">Buscar Vehículo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <hr>
+            <!--Alertas-->
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6">
+                    <nb-alert outline="default" class="text-hint text-center subtitle-2">
+                        <div>
+                            <nb-icon icon="info-outline" status="default" style="font-size: 1.5rem;"></nb-icon>
+                        </div>
+                        <div class="text-default">Ingrese el criterio de Búsqueda y presione el boton Buscar Vehículo</div>
+                    </nb-alert>
+                </div>
+            </div>
+            <!----------->
+            <!--Personalizado-->
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6">
+                    <nb-alert outline="info" class="text-center subtitle-2">
+                        <div>
+                            <nb-icon icon="info-outline" status="info" style="font-size: 1.5rem;"></nb-icon>
+                        </div>
+                        <div class="text-info">No se encontró el vehículo con los criterios de busqueda, puede realizar una venta nueva</div>
+                        <div class="text-center mt-2">
+                            <button type="button" nbButton outline status="info">Buscar Vehículo</button>
+                        </div>
+                    </nb-alert>
+                </div>
+            </div>
+            <!----------->
+            <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table>
+
+            Opcones=>{{opciones | json}}
+        </div>
+
+    </nb-card-body>
+
+</nb-card>

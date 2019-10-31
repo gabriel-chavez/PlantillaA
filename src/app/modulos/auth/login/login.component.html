@@ -18,7 +18,7 @@
                                     <input type="password" nbInput fullWidth id="inputPassword1" placeholder="Escriba su contraseña" formControlName="contrasena">
                                 </div>
                                 <nb-alert status="danger" *ngIf="mostrarAlerta && inicioSesionForm.pristine" class="text-center mt-5 animated bounce faster">
-                                    {{respuesta.Mensaje}}
+                                    {{respuesta.mensaje}}
                                 </nb-alert>
                                 <button type="submit" nbButton shape="round" class="btn btn-block mt-4 mb-4" [disabled]="inicioSesionForm.invalid">
                                         Iniciar Sesión

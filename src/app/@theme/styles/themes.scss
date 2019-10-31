@@ -3,6 +3,9 @@
 // @nebular out of the box themes
 @import "~@nebular/theme/styles/themes";
 $colorTextoMenu: #0270bd;
+$colorInfo: #2983c4;
+$colorInfoHover: #0070ba;
+$colorInfoActive: #0070ba;
 $colorPrimario: #004890;
 $colorPrimarioHover: #0070ba;
 $colorPrimarioActive: #0070ba;
@@ -12,13 +15,16 @@ $nb-themes: nb-register-theme( ( layout-padding-top: 2.25rem, menu-item-icon-mar
 user-name-text-color: white, footer-background-color: #174680, header-background-color: #174680, footer-text-color: white,
 /**COLORES**/
 
-color-danger-default: red,
+color-danger-default: #f45656,
 /**MENU**/
 
 menu-item-hover-text-color: $colorTextoMenu, menu-item-icon-hover-color: $colorTextoMenu, menu-item-active-text-color: $colorTextoMenu, menu-item-icon-active-color: $colorTextoMenu, menu-submenu-item-hover-text-color: $colorTextoMenu, menu-submenu-item-icon-hover-color: $colorTextoMenu, menu-submenu-item-active-border-color: $colorTextoMenu, menu-submenu-item-active-text-color: $colorTextoMenu, menu-submenu-item-icon-active-color: $colorTextoMenu, menu-submenu-item-active-hover-border-color: $colorTextoMenu, menu-submenu-item-active-hover-text-color: $colorTextoMenu, menu-submenu-item-icon-active-hover-color: $colorTextoMenu,
 /**BOTONES**/
 
-button-filled-primary-background-color: $colorPrimario, button-filled-primary-border-color: $colorPrimarioHover, button-filled-primary-hover-background-color: $colorPrimarioHover, button-filled-primary-active-background-color: $colorPrimarioActive), default, default);
+button-filled-primary-background-color: $colorPrimario, button-filled-primary-border-color: $colorPrimarioHover, button-filled-primary-hover-background-color: $colorPrimarioHover, button-filled-primary-active-background-color: $colorPrimarioActive, button-filled-info-background-color: $colorInfo, button-filled-info-border-color: $colorInfoHover, button-filled-info-hover-background-color: $colorInfoHover, button-filled-info-active-background-color: $colorInfoActive,
+/*BOTON OUTLINE PRIMARY*/
+
+button-outline-primary-border-color: $colorPrimario, button-outline-primary-text-color: $colorPrimario, button-outline-primary-focus-border-color: $colorPrimario, button-outline-primary-focus-text-color: $colorPrimario, button-outline-primary-hover-border-color: $colorPrimarioHover, button-outline-primary-hover-text-color: $colorPrimarioHover, button-outline-primary-active-border-color: $colorPrimarioActive, button-outline-primary-active-text-color: $colorPrimarioActive, color-info-default: $colorInfo, color-primary-default: $colorPrimario, text-info: $colorInfo), default, default);
 $nb-themes: nb-register-theme( ( layout-padding-top: 2.25rem, menu-item-icon-margin: 0 0.5rem 0 0, card-height-tiny: 13.5rem, card-height-small: 21.1875rem, card-height-medium: 28.875rem, card-height-large: 36.5625rem, card-height-giant: 44.25rem, card-margin-bottom: 1.875rem, card-header-with-select-padding-top: 0.5rem, card-header-with-select-padding-bottom: 0.5rem, select-min-width: 6rem, slide-out-background: #252547, slide-out-shadow-color: 2px 0 3px #29157a, slide-out-shadow-color-rtl: -2px 0 3px #29157a), cosmic, cosmic);
 $nb-themes: nb-register-theme( ( layout-padding-top: 2.25rem, menu-item-icon-margin: 0 0.5rem 0 0, card-height-tiny: 13.5rem, card-height-small: 21.1875rem, card-height-medium: 28.875rem, card-height-large: 36.5625rem, card-height-giant: 44.25rem, card-margin-bottom: 1.875rem, card-header-with-select-padding-top: 0.5rem, card-header-with-select-padding-bottom: 0.5rem, select-min-width: 6rem, slide-out-background: linear-gradient(270deg, #edf1f7 0%, #e4e9f2 100%), slide-out-shadow-color: 0 4px 14px 0 #8f9bb3, slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3), corporate, corporate);
 $nb-themes: nb-register-theme( ( layout-padding-top: 2.25rem, menu-item-icon-margin: 0 0.5rem 0 0, card-height-tiny: 13.5rem, card-height-small: 21.1875rem, card-height-medium: 28.875rem, card-height-large: 36.5625rem, card-height-giant: 44.25rem, card-margin-bottom: 1.875rem, card-header-with-select-padding-top: 0.5rem, card-header-with-select-padding-bottom: 0.5rem, select-min-width: 6rem, slide-out-background: linear-gradient(270deg, #222b45 0%, #151a30 100%), slide-out-shadow-color: 0 4px 14px 0 #8f9bb3, slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3), dark, dark);
