@@ -42,16 +42,17 @@
                         </div>
                         <div class="text-info">No se encontró el vehículo con los criterios de busqueda, puede realizar una venta nueva</div>
                         <div class="text-center mt-2">
-                            <button type="button" nbButton outline status="info">Buscar Vehículo</button>
+                            <button type="button" nbButton outline status="info">Venta nueva</button>
                         </div>
                     </nb-alert>
                 </div>
             </div>
             <!----------->
-            <ng2-smart-table [settings]="settings" [source]="source">
-            </ng2-smart-table>
+            <!-- <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table> -->
+            <ngx-datatable-custom [columnas]="columnas" [source]="source" [opciones]="opciones" (opcionseleccionada)="ejecutarOpcion($event)"></ngx-datatable-custom>
 
-            Opcones=>{{opciones | json}}
+
         </div>
 
     </nb-card-body>

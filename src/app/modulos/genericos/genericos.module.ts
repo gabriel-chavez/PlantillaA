@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GenericosRoutingModule } from './genericos-routing.module';
-import { BusquedaVehiculoComponent, ButtonCustomComponent } from './busqueda-vehiculo/busqueda-vehiculo.component';
+import { BusquedaVehiculoComponent } from './busqueda-vehiculo/busqueda-vehiculo.component';
 import { NebularModule } from '../../nebular.module';
+import { VariosModule } from '../varios/varios.module';
+
+
 
 @NgModule({
-  declarations: [BusquedaVehiculoComponent,ButtonCustomComponent],
+  declarations: [BusquedaVehiculoComponent],
   imports: [
     CommonModule,
     GenericosRoutingModule,
-    NebularModule
+    NebularModule,
+    VariosModule
   ],
   exports:[BusquedaVehiculoComponent],
-  entryComponents:[ButtonCustomComponent]
+ 
 })
 export class GenericosModule { }

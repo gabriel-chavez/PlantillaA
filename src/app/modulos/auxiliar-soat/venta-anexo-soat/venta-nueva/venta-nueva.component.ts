@@ -6,13 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./venta-nueva.component.scss']
 })
 export class VentaNuevaComponent implements OnInit {
-  public opciones:any[]=[
-    { title: 'Renovar SOAT',name:'renovar' },
-    { title: 'Comprobante SOAT',name:'comprobante' },
-  ];
-  constructor() { }
+  public opciones:any[];
+  public nombreOpcion:string;
+  constructor() { 
+    this.opciones=[
+      { title: 'Renovar SOAT PRIUEBA',name:'renovar' },
+      { title: 'Comprobante SOAT xxxxx',name:'comprobante' },
+    ];
+  }
 
   ngOnInit() {
+  }
+
+  public ejecutarOpcion(nombreOpcion){
+    this.nombreOpcion=nombreOpcion;
   }
 
 }
