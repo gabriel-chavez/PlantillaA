@@ -36,20 +36,25 @@ export class LoginService {
                 'Accept': '*/*'
             })
         }
-        return this.http.post<any>(
-            `${this.url}autenticar`, JSON.stringify(credenciales), httpOpciones)
-            .pipe(
-                map((respuestaBase: RespuestaBase) => {
-                    console.log(respuestaBase)
-                    if (respuestaBase.exito) {
-                        let token: Token = JSON.parse(respuestaBase.resultado);
-                        this.guardarToken(token);
-                        this.currentUserSubject.next(token);
-                    }
-
-                    return respuestaBase;
-                })
-            );
+     //   try {
+            return this.http.post<any>(
+                `${this.url}autenticar2`, JSON.stringify(credenciales), httpOpciones)
+                .pipe(
+                    map((respuestaBase: RespuestaBase) => {
+                        console.log(respuestaBase)
+                        if (respuestaBase.exito) {
+                            let token: Token = JSON.parse(respuestaBase.resultado);
+                            this.guardarToken(token);
+                            this.currentUserSubject.next(token);
+                        }
+    
+                        return respuestaBase;
+                    })
+                );
+       /* } catch (error) {
+            console.log(error)
+        }*/
+       
     }
     cerrarSesion() {
         sessionStorage.removeItem('tokenUsuario');

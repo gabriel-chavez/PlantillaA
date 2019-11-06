@@ -10,8 +10,10 @@ export class FrmValidacionComponent {
   @Input() mensaje: string;
   @Input() campo: string;
   @Input() form: FormGroup;
+  cxx:string;
 
   esValido() {    
+   
     return !this.form.get(this.campo).valid && this.form.get(this.campo).touched;
   }  
 }

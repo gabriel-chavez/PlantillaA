@@ -13,6 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(error => {  
+      console.log(error)
       console.log(error.message) 
       this.alerta.error(error.message);
      /* //el error 403 no se mostrara cuando sea una solicitud de autenticacion (el mensaje 403 sera mostrado por el modulo de autenticacion)  

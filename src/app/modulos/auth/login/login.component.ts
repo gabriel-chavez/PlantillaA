@@ -20,7 +20,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router) {
+    private router: Router) 
+    {
     this.inicioSesionForm = this.formBuilder.group({
       usuario: ['', Validators.required],
       contrasena: ['', Validators.required]
@@ -32,14 +33,16 @@ export class LoginComponent {
     this.respuesta = new RespuestaBase();
     this.mostrarAlerta = false
     if (this.inicioSesionForm.valid) {
+
       let usr = this.inicioSesionForm.controls.usuario.value;
       let pas = this.inicioSesionForm.controls.contrasena.value;
+
       this.inicioSesionForm.reset();
       this.loginService.iniciarSesion(usr, pas)
         .pipe(first())
         .subscribe(
           (data: RespuestaBase) => {
-            this.respuesta = data;            
+            this.respuesta = data;
             if (this.respuesta.exito) {
               this.redireccionar();
             } else {
@@ -49,8 +52,6 @@ export class LoginComponent {
               });
               this.mostrarAlerta = true;
             }
-
-
           }
           , (respuestaError) => {
             this.respuesta = respuestaError.error;
@@ -60,11 +61,10 @@ export class LoginComponent {
             });
             this.mostrarAlerta = true;
           }
-          );
+        );
     }
   }
   redireccionar() {
-    
     if (this.loginService.estaAtutenticado)
       console.log("redireccionar")
     this.router.navigate(['/modulos']);
