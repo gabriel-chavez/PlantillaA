@@ -1,4 +1,3 @@
-import { StringifyOptions } from 'querystring';
 
 export class TablaOpciones {
     icono:string;

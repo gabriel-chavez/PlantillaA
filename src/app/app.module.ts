@@ -5,7 +5,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -23,7 +23,8 @@ import {
   NbWindowModule,  
 } from '@nebular/theme';
 import { JwtInterceptor } from './genericos/Interceptor/jwt.interceptor';
-import { ErrorInterceptor } from './genericos/Interceptor/error.interceptor';
+import { ErrorServidorInterceptor } from './genericos/Interceptor/error-servidor.interceptor';
+import { GlobalErrorHandler } from './genericos/error/global-error-handler';
 
 
 
@@ -49,8 +50,10 @@ import { ErrorInterceptor } from './genericos/Interceptor/error.interceptor';
     CoreModule.forRoot(),        
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },   
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorServidorInterceptor, multi: true },
+    
   ],
   bootstrap: [AppComponent],
 })

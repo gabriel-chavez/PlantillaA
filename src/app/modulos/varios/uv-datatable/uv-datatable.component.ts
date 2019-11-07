@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TablaOpciones } from '../../../modelos/genericos/uv-datatable';
+import { TablaOpciones } from '../../../modelos/genericos/uv-datatable.model';
 @Component({
   selector: 'uv-datatable',
   template: `<ng2-smart-table [settings]="ajustes" [source]="datos"></ng2-smart-table>`,

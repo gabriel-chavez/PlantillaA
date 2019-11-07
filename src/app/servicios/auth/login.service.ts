@@ -23,8 +23,7 @@ export class LoginService {
     public get currentUserValue(): Token {
         return this.currentUserSubject.value;
     }
-    iniciarSesion(nombreUsuario: string, contrasena: string) {
-
+    iniciarSesion(nombreUsuario: string, contrasena: string) {      
         const credenciales = {
             usuario: nombreUsuario,
             contraseña: contrasena,
@@ -36,25 +35,20 @@ export class LoginService {
                 'Accept': '*/*'
             })
         }
-     //   try {
-            return this.http.post<any>(
-                `${this.url}autenticar2`, JSON.stringify(credenciales), httpOpciones)
-                .pipe(
-                    map((respuestaBase: RespuestaBase) => {
-                        console.log(respuestaBase)
-                        if (respuestaBase.exito) {
-                            let token: Token = JSON.parse(respuestaBase.resultado);
-                            this.guardarToken(token);
-                            this.currentUserSubject.next(token);
-                        }
-    
-                        return respuestaBase;
-                    })
-                );
-       /* } catch (error) {
-            console.log(error)
-        }*/
-       
+        return this.http.post<any>(
+            `${this.url}autenticar`, JSON.stringify(credenciales), httpOpciones)
+            .pipe(
+                map((respuestaBase: RespuestaBase) => {
+                    console.log(respuestaBase)
+                    if (respuestaBase.exito) {
+                        let token: Token = JSON.parse(respuestaBase.resultado);
+                        this.guardarToken(token);
+                        this.currentUserSubject.next(token);
+                    }
+
+                    return respuestaBase;
+                })
+            );
     }
     cerrarSesion() {
         sessionStorage.removeItem('tokenUsuario');
@@ -85,7 +79,7 @@ export class LoginService {
             return false
         }
     }
-    cambiarContrasena(nombreUsuario: string, contrasena: string,contrasenaNueva: string) {
+    cambiarContrasena(nombreUsuario: string, contrasena: string, contrasenaNueva: string) {
         const credenciales = {
             codigosistema: "000",
             usuario: nombreUsuario,
@@ -101,7 +95,7 @@ export class LoginService {
         return this.http.post<any>(
             `${this.url}cambiarclave`, JSON.stringify(credenciales), httpOpciones)
             .pipe(
-                map((respuestaBase: RespuestaBase) => {                     
+                map((respuestaBase: RespuestaBase) => {
                     return respuestaBase;
                 })
             );

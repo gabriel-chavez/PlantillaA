@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TablaOpciones } from '../../../../modelos/genericos/uv-datatable';
-import { Alert } from 'selenium-webdriver';
+import { TablaOpciones } from '../../../../modelos/genericos/uv-datatable.model';
+
+
 
 @Component({
   selector: 'ngx-venta-nueva',

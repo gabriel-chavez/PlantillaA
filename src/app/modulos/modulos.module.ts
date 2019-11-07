@@ -6,6 +6,7 @@ import { NbMenuModule } from '@nebular/theme';
 import { VariosModule } from './varios/varios.module';
 
 
+
 @NgModule({
 
   imports: [
@@ -18,6 +19,8 @@ import { VariosModule } from './varios/varios.module';
   declarations: [
     ModulosComponent,
   
-  ]
+  ],
+
+
 })
 export class ModulosModule { }

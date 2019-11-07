@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  servicioAutenticacionUrl: "https://app-desarrollo.univida.bo/webserviceautenticacion/api/autenticacion/"
+  servicioAutenticacionUrl: "https://app-desarrollo.univida.bo/webserviceautenticacion/api/autenticacion1/"
 };

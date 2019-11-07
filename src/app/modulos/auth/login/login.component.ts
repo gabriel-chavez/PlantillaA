@@ -4,6 +4,7 @@ import { LoginService } from '../../../servicios/auth/login.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { RespuestaBase } from '../../../modelos/genericos/respuesta-base.model';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginComponent {
   respuesta: RespuestaBase = new RespuestaBase();
   mostrarAlerta: boolean;
   constructor(
+    private http: HttpClient,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router) 
@@ -52,15 +54,7 @@ export class LoginComponent {
               });
               this.mostrarAlerta = true;
             }
-          }
-          , (respuestaError) => {
-            this.respuesta = respuestaError.error;
-            this.inicioSesionForm.setValue({
-              usuario: usr,
-              contrasena: pas
-            });
-            this.mostrarAlerta = true;
-          }
+          }         
         );
     }
   }
@@ -68,5 +62,20 @@ export class LoginComponent {
     if (this.loginService.estaAtutenticado)
       console.log("redireccionar")
     this.router.navigate(['/modulos']);
+  }
+
+  throwError(){
+    throw new Error('My Pretty Error');
+  }
+
+  throwHttpError(){
+    let usr = this.inicioSesionForm.controls.usuario.value;
+    let pas = this.inicioSesionForm.controls.contrasena.value;
+    
+    this.loginService.iniciarSesion(usr, pas).pipe(first())
+    .subscribe(x=>{
+      console.log("asdasdasdasd")
+    })
+    //this.http.get('urlhere').subscribe();
   }
 }
