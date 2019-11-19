@@ -16,7 +16,7 @@ export class UsuarioService {
     const helper = new JwtHelperService();
     if (sessionStorage.getItem('tokenUsuario')) {
       let token: Token = JSON.parse(sessionStorage.getItem('tokenUsuario'));
-      this.datosUsuario = helper.decodeToken(token.TokenAcceso);
+      this.datosUsuario = helper.decodeToken(token.tokenAcceso);
       return Observable.of(this.datosUsuario)
     }
     else {

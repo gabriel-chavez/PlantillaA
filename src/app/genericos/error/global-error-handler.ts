@@ -5,6 +5,7 @@ import { AlertaService } from '../../servicios/generico/alerta.service';
 import { LogErrorService } from '../../servicios/generico/log-error.service';
 import { LogError } from '../../modelos/genericos/log-error.model';
 import { ErrorService } from '../../servicios/generico/error.service';
+import { RespuestaBase } from '../../modelos/genericos/respuesta-base.model';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -13,27 +14,24 @@ export class GlobalErrorHandler implements ErrorHandler {
   }
   
   handleError(error: Error | HttpErrorResponse) {
-   // alert("asdasdasdasd")
     const errorService = this.injector.get(ErrorService);
     const logError= this.injector.get(LogErrorService);
-    const alerta = this.injector.get(AlertaService);
+    
     let oLogError:LogError=new LogError();   
     if (error instanceof HttpErrorResponse) {
       // Server error      
       oLogError.mensaje = errorService.obtenerMensajeErrorServer(error);
       oLogError.tipo="HttpErrorResponse";
-      alerta.error(oLogError.mensaje);
+      console.log(oLogError.mensaje);
     } else {
       // Cliente Error      
-      oLogError.mensaje = errorService.obtenerMensajeErrorCliente(error);
-      alerta.error( oLogError.mensaje);
+      oLogError.mensaje = errorService.obtenerMensajeErrorCliente(error);      
       oLogError.tipo="Javascript";
+      //alerta.error( oLogError.mensaje);
     }
     // stack para todos los errores
-    oLogError.detalle=errorService.obtenerStackError(error);
-    
+    oLogError.detalle=errorService.obtenerStackError(error);    
     oLogError.url=errorService.obtenerUrlError();
-    logError.agregar(oLogError);
-    console.error(oLogError);
+   // logError.agregarLog(oLogError).subscribe();  
   }
 }

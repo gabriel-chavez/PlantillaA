@@ -7,6 +7,7 @@ import * as StackTrace from 'stacktrace-js';
 })
 export class ErrorService {
   constructor(public location: LocationStrategy) {
+  
   }
   obtenerMensajeErrorCliente(error: Error): string {
     return error.message ?
@@ -19,18 +20,23 @@ export class ErrorService {
       'No se tiene conección';
   }
   obtenerStackError(error: Error): string {
+    let objError:ErrorAux=new ErrorAux();
     //obtenemos las primeras 10 lineas de la pila de errores
     // let stack=StackTrace.fromError(error).then(stackframes => {
     //   const stackString = stackframes
-    //     .splice(0, 100)
+    //     .splice(0, 20)
     //     .map(function (sf) {
     //       console.log(sf)
     //       return sf.toString();
     //     }).join('\n');      
     //   return stackString;
     // });
-    // console.log("Mensjae error stack",stack);
-  //  console.log("error javascript",error)
+
+
+
+   // objError.consolaError=error;
+  //  objError.stackError=stack;
+    
     return JSON.stringify(error);
   }
   obtenerUrlError():string {
@@ -38,4 +44,8 @@ export class ErrorService {
       ? this.location.path() : '';
     return url;
   }
+}
+class ErrorAux{
+  consolaError:object;
+  stackError:any;
 }

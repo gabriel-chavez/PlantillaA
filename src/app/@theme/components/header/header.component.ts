@@ -126,6 +126,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   cerrarSesion() {
     this.loginService.cerrarSesion();
-    this.router.navigate(['/auth/login']);
   }
 }

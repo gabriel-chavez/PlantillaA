@@ -20,11 +20,13 @@ import {
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
-  NbWindowModule,  
+  NbWindowModule,
 } from '@nebular/theme';
 import { JwtInterceptor } from './genericos/Interceptor/jwt.interceptor';
 import { ErrorServidorInterceptor } from './genericos/Interceptor/error-servidor.interceptor';
 import { GlobalErrorHandler } from './genericos/error/global-error-handler';
+import { PantallaCargandoInterceptor } from './genericos/Interceptor/pantalla-cargando.interceptor';
+
 
 
 
@@ -47,13 +49,15 @@ import { GlobalErrorHandler } from './genericos/error/global-error-handler';
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
-    CoreModule.forRoot(),        
+    CoreModule.forRoot(),
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },   
+    { provide: HTTP_INTERCEPTORS, useClass: PantallaCargandoInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorServidorInterceptor, multi: true },
     
+
   ],
   bootstrap: [AppComponent],
 })

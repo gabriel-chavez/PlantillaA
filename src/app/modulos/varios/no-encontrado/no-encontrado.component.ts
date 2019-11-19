@@ -1,5 +1,7 @@
 import { NbMenuService } from '@nebular/theme';
 import { Component } from '@angular/core';
+import { LoginService } from '../../../servicios/auth/login.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-no-encontrado',
@@ -8,10 +10,23 @@ import { Component } from '@angular/core';
 })
 export class NoEncontradoComponent   {
 
-  constructor(private menuService: NbMenuService) { }
+  constructor(private menuService: NbMenuService, private loginService: LoginService,) { }
 
 
   goToHome() {
     this.menuService.navigateHome();
+  }
+  
+  throwError(){
+    throw new Error('My Pretty Error');
+  }
+
+  throwHttpError(){
+    let usr = "";
+    let pas = "";
+    
+    this.loginService.iniciarSesionBorrar(usr, pas).pipe(first())
+    .subscribe()
+    //this.http.get('urlhere').subscribe();
   }
 }

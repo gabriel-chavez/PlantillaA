@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -13,21 +13,20 @@ export class JwtInterceptor implements HttpInterceptor {
 
     constructor(private loginService: LoginService, private cargando: CargandoService) { }
 
-    intercept(peticion: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {        
-        this.cargando.mostrar();
-    
+    intercept(peticion: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {     
         let usuarioActual = this.loginService.currentUserValue;
-        if (usuarioActual && usuarioActual.TokenAcceso) {
+        if (usuarioActual && usuarioActual.tokenAcceso) {
             peticion = peticion.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${usuarioActual.TokenAcceso}`
+                    Authorization: `Bearer ${usuarioActual.tokenAcceso}`
                 }
             });
         }
+
         return next.handle(peticion).pipe(
-      
-            finalize(() => {                
-                this.cargando.ocultar();
+
+            finalize(() => {
+              console.log("fin peticion")
             })
         );
     }

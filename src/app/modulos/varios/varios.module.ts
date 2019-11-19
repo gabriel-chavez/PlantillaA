@@ -8,6 +8,7 @@ import { ButtonCustomComponent, UvDatatableComponent } from './uv-datatable/uv-d
 
 
 
+
 @NgModule({
     imports: [
         VariosRoutingModule,
@@ -18,7 +19,7 @@ import { ButtonCustomComponent, UvDatatableComponent } from './uv-datatable/uv-d
         NoEncontradoComponent,
         FrmValidacionComponent,
         ButtonCustomComponent, 
-        UvDatatableComponent
+        UvDatatableComponent,
     ],
     exports:[FrmValidacionComponent,UvDatatableComponent],
     entryComponents:[ButtonCustomComponent]

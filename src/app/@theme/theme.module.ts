@@ -43,6 +43,7 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { PrimeraMayusculaPipe } from '../genericos/pipes/primera-mayuscula.pipe';
+import { PantallaCargandoComponent } from './components/pantalla-cargando/pantalla-cargando.component';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -67,7 +68,8 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-  PerfilCardComponent
+  PerfilCardComponent,
+  PantallaCargandoComponent
 ];
 const PIPES = [
   CapitalizePipe,

@@ -6,6 +6,8 @@ import { environment } from '../../../environments/environment';
 import { RespuestaBase } from '../../modelos/genericos/respuesta-base.model';
 import { Token } from '../../modelos/genericos/token.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { TokenRefresh } from '../../modelos/genericos/token-refresh.model';
 
 
 @Injectable({
@@ -15,7 +17,7 @@ export class LoginService {
     private url: string;
     private currentUserSubject: BehaviorSubject<Token>;
     public currentUser: Observable<Token>;
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.url = environment.servicioAutenticacionUrl;
         this.currentUserSubject = new BehaviorSubject<Token>(JSON.parse(sessionStorage.getItem('tokenUsuario')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -23,11 +25,43 @@ export class LoginService {
     public get currentUserValue(): Token {
         return this.currentUserSubject.value;
     }
-    iniciarSesion(nombreUsuario: string, contrasena: string) {      
+    // refrescarToken() {
+    //     const tokenRefresh:TokenRefresh = {
+    //         tokenAcceso: "2",
+    //         codigoActualizacion: 212,
+    //         usuarioAut: "xx",
+    //         codigoSistema: "000"
+    //     }
+    //     const httpOpciones = {
+    //         headers: new HttpHeaders({
+    //             'Content-Type': 'application/json',
+    //             'Accept': '*/*'
+    //         })
+    //     }
+    //     return this.http.post<any>(
+    //         `${this.url}autenticar`, JSON.stringify(credenciales), httpOpciones)
+    //         .pipe(
+    //             map((respuestaBase: RespuestaBase) => {
+    //                 console.log(respuestaBase)
+    //                 if (respuestaBase.exito) {
+    //                     let token: Token = JSON.parse(respuestaBase.resultado);
+    //                     this.guardarToken(token);
+    //                     this.currentUserSubject.next(token);
+    //                 }
+    //                 else
+    //                 {
+
+    //                 }
+    //                 return respuestaBase;
+    //             })
+    //         );
+    // }
+
+    iniciarSesion(nombreUsuario: string, contrasena: string) {
         const credenciales = {
-            usuario: nombreUsuario,
-            contraseña: contrasena,
-            codigosistema: "000"
+            Usuario: nombreUsuario,
+            Contraseña: contrasena,
+            CodigoSistema: "000"
         }
         const httpOpciones = {
             headers: new HttpHeaders({
@@ -50,11 +84,39 @@ export class LoginService {
                 })
             );
     }
+    iniciarSesionBorrar(nombreUsuario: string, contrasena: string) {
+        const credenciales = {
+            usuario: nombreUsuario,
+            contraseña: contrasena,
+            codigosistema: "000"
+        }
+        const httpOpciones = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            })
+        }
+        return this.http.post<any>(
+            `${this.url}autenticasssssr`, JSON.stringify(credenciales), httpOpciones)
+            .pipe(
+                map((respuestaBase: RespuestaBase) => {
+                    console.log(respuestaBase)
+                    if (respuestaBase.exito) {
+                        let token: Token = JSON.parse(respuestaBase.resultado);
+                        this.guardarToken(token);
+                        this.currentUserSubject.next(token);
+                    }
+
+                    return respuestaBase;
+                })
+            );
+    }
     cerrarSesion() {
         sessionStorage.removeItem('tokenUsuario');
         sessionStorage.removeItem('expira');
-        this.currentUserSubject.next(null);
+        this.currentUserSubject.next(null);        
         console.log("cerrar sesion")
+        this.router.navigate(['/auth/login']);
     }
     private guardarToken(token: Token) {
 

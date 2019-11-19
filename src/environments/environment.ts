@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
-  servicioAutenticacionUrl: "https://app-desarrollo.univida.bo/webserviceautenticacion/api/autenticacion1/"
+  servicioAutenticacionUrl: "http://docker-desa:80/api/autenticacion/",
+  servicioTransversalUrl:"http://docker-desa:81/api/erroresNivelAPP/"
 };
