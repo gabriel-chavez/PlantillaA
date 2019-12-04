@@ -7,6 +7,7 @@ import { NebularModule } from '../../nebular.module';
 import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 //import { VariosModule } from '../varios/varios.module';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { UvComponentsModule } from '../../genericos/uv-componentes/uv-components.module';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.componen
         NebularModule,
         FormsModule,
         ReactiveFormsModule,
-       // VariosModule
+        UvComponentsModule
     ],
     declarations: [
         AutenticacionComponent,
