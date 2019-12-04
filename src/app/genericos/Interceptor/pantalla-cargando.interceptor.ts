@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize} from "rxjs/operators";
-import { PantallaCargandoService } from '../../servicios/generico/pantalla-cargando.service';
+import { PantallaCargandoService } from '../servicios/pantalla-cargando.service';
 
 
 @Injectable()
@@ -30,6 +30,7 @@ export class PantallaCargandoInterceptor implements HttpInterceptor {
             this.activeRequests++;
             return next.handle(request).pipe(
                 finalize(() => {
+                    if(this.activeRequests>0)
                     this.activeRequests--;
                     if (this.activeRequests === 0) {
                         this.pantallaCargandoService.detener();

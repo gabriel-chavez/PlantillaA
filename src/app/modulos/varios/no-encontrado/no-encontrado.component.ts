@@ -1,7 +1,7 @@
 import { NbMenuService } from '@nebular/theme';
 import { Component } from '@angular/core';
-import { LoginService } from '../../../servicios/auth/login.service';
-import { first } from 'rxjs/operators';
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'ngx-no-encontrado',
@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
 })
 export class NoEncontradoComponent   {
 
-  constructor(private menuService: NbMenuService, private loginService: LoginService,) { }
+  constructor(private menuService: NbMenuService, private http: HttpClient) { }
 
 
   goToHome() {
@@ -22,11 +22,6 @@ export class NoEncontradoComponent   {
   }
 
   throwHttpError(){
-    let usr = "";
-    let pas = "";
-    
-    this.loginService.iniciarSesionBorrar(usr, pas).pipe(first())
-    .subscribe()
-    //this.http.get('urlhere').subscribe();
+    this.http.get('urlhere').subscribe();
   }
 }

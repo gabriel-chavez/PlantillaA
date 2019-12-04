@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ngx-auth',
+  selector: 'ngx-autenticacion',
   template: ` 
       <router-outlet></router-outlet>
 `
 })
-export class AuthComponent implements OnInit {
+export class AutenticacionComponent implements OnInit {
 
   constructor() { }
 

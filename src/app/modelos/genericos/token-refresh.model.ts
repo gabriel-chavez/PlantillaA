@@ -1,6 +1,6 @@
 export class TokenRefresh {
     tokenAcceso: string;
-    codigoActualizacion: number;
+    codigoActualizacion: string;
     usuarioAut: string;
     codigoSistema: string;   
   }

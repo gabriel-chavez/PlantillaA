@@ -16,7 +16,7 @@ import { MENU_ITEMS } from './modulos-menu';
 export class ModulosComponent implements OnInit {
   menu = MENU_ITEMS;
   constructor() {    
-    console.log(this.menu)
+    
   }
 
   ngOnInit() {

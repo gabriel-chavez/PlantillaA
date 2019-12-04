@@ -5,10 +5,9 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, pipe } from 'rxjs';
-import { LoginService } from '../../../servicios/auth/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UsuarioService } from '../../../servicios/generico/usuario.service';
 import { Usuario } from '../../../modelos/genericos/usuario.model';
+import { AutenticacionService } from '../../../servicios/Autenticacion/autenticacion.service';
 
 @Component({
   selector: 'ngx-header',
@@ -33,21 +32,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private dialogService: NbDialogService,
-    private loginService: LoginService,
-    private router: Router,   
-    private usuarioService: UsuarioService
+    private AutService: AutenticacionService,
+    private router: Router,       
   ) {
   }
 
 
 
   ngOnInit() {
-    this.currentTheme = this.themeService.currentTheme;
-
-    this.usuarioService.obtenerDatosUsuario().subscribe((data: Usuario) => {
-      this.datosUsuario = data;
-    });
-
+    this.currentTheme = this.themeService.currentTheme;  
+    this.datosUsuario=this.AutService.usuarioAutenticado;
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -75,7 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     if (title === 'Cambiar contraseña') {
       let rutaActual=encodeURI(this.router.url);     
-      this.router.navigate(['/auth/cambiar-contrasena'], { queryParams: {ruta: rutaActual}});
+      this.router.navigate(['/autenticacion/cambiar-contrasena'], { queryParams: {ruta: rutaActual}});
     }
   }
 
@@ -125,6 +119,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       { context: contenido, closeOnEsc: true, closeOnBackdropClick: false, });
   }
   cerrarSesion() {
-    this.loginService.cerrarSesion();
+    this.AutService.cerrarSesion();
   }
 }

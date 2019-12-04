@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import * as StackTrace from 'stacktrace-js';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class ErrorService {
   obtenerMensajeErrorServer(error: HttpErrorResponse): string {
     return navigator.onLine ?
       error.message :
-      'No se tiene conección';
+      "No es posible procesar su solicitud, verifique su conexión";
   }
   obtenerStackError(error: Error): string {
     let objError:ErrorAux=new ErrorAux();

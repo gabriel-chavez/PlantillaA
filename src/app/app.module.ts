@@ -22,11 +22,11 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import { JwtInterceptor } from './genericos/Interceptor/jwt.interceptor';
-import { ErrorServidorInterceptor } from './genericos/Interceptor/error-servidor.interceptor';
+//import { JwtInterceptor } from './genericos/Interceptor/jwt.interceptor';
+//import { ErrorServidorInterceptor } from './genericos/Interceptor/error-servidor.interceptor';
 import { GlobalErrorHandler } from './genericos/error/global-error-handler';
 import { PantallaCargandoInterceptor } from './genericos/Interceptor/pantalla-cargando.interceptor';
-
+import { TokenInterceptor } from './genericos/Interceptor/token.Interceptor';
 
 
 
@@ -53,10 +53,9 @@ import { PantallaCargandoInterceptor } from './genericos/Interceptor/pantalla-ca
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: PantallaCargandoInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorServidorInterceptor, multi: true },
-    
+
 
   ],
   bootstrap: [AppComponent],

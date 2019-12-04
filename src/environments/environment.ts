@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  servicioAutenticacionUrl: "http://docker-desa:80/api/autenticacion/",
+  servicioAutenticacionUrl: "http://docker-desa/api/autenticacion/",
   servicioTransversalUrl:"http://docker-desa:81/api/erroresNivelAPP/"
 };

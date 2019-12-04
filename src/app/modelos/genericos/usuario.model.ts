@@ -1,40 +1,40 @@
 export class Usuario {
-    EstadoEmpleadoActivo: boolean;
-    SuperiorUsuarioAD: string;
-    SuperiorUsuario: string;
-    SuperiorCargo: string;
-    SuperiorNombre: string;
-    SuperiorSecuencial: number;
-    SucursalDepartamento: string;
-    SucursalCiudad: string;
-    SucursalDireccion: string;
-    SucursalNombre: string;
-    SucursalCodigo: number;
-    SucursalIdDepartamento: string;
-    EmpleadoCiudadResidencia: string;
-    EmpleadoDireccion: string;
-    EmpleadoDocumentoCompleto: string;
-    EmpleadoDocumentoExtension: string;
-    EmpleadoDocuentoNro: string;
-    EmpleadoDocumentoTipo: string;
-    EmpleadoNombreCompleto: string;
-    EmpleadoApCasada: string;
-    EmpleadoApMaterno: string;
-    EmpleadoApPaterno: string;
-    EmpleadoNombreAlt: string;
-    EmpleadoNombreSeg: string;
-    EmpleadoNombrePrim: string;
-    EmpleadoUsuarioAD: number;
-    EmpleadoUsuario: string;
-    EmpleadoCargo: string;
-    EmpleadoSecuencial: number;
-    ContratoSecuencial: number;
-    Roles: Rol[];
+    estadoEmpleadoActivo: boolean;
+    superiorUsuarioAD: string;
+    superiorUsuario: string;
+    superiorCargo: string;
+    superiorNombre: string;
+    superiorSecuencial: number;
+    sucursalDepartamento: string;
+    sucursalCiudad: string;
+    sucursalDireccion: string;
+    sucursalNombre: string;
+    sucursalCodigo: number;
+    sucursalIdDepartamento: string;
+    empleadoCiudadResidencia: string;
+    empleadoDireccion: string;
+    empleadoDocumentoCompleto: string;
+    empleadoDocumentoExtension: string;
+    empleadoDocuentoNro: string;
+    empleadoDocumentoTipo: string;
+    empleadoNombreCompleto: string;
+    empleadoApCasada: string;
+    empleadoApMaterno: string;
+    empleadoApPaterno: string;
+    empleadoNombreAlt: string;
+    empleadoNombreSeg: string;
+    empleadoNombrePrim: string;
+    empleadoUsuarioAD: number;
+    empleadoUsuario: string;
+    empleadoCargo: string;
+    empleadoSecuencial: number;
+    contratoSecuencial: number;
+    roles: Rol[];
   }
   
   export class Rol {
-    RolId: number;
-    RolDescripcion: string;
-    RolSistemas: string;
+    rolId: number;
+    rolDescripcion: string;
+    rolSistemas: string;
   }
   

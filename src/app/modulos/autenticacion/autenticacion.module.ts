@@ -1,24 +1,25 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { AuthComponent } from './auth.component';
+import { AutenticacionComponent } from './autenticacion.component';
 
-import { LoginComponent } from './login/login.component';
-import { AuthRoutingModule } from './auth-routing.module';
+import { AutenticacionRoutingModule } from './autenticacion-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NebularModule } from '../../nebular.module';
 import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 import { VariosModule } from '../varios/varios.module';
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+
 
 @NgModule({
     imports: [
-        AuthRoutingModule,
+        AutenticacionRoutingModule,
         NebularModule,
         FormsModule,
         ReactiveFormsModule,
         VariosModule
     ],
     declarations: [
-        AuthComponent,
-        LoginComponent,
+        AutenticacionComponent,
+        IniciarSesionComponent,
         CambiarContrasenaComponent,
         
 

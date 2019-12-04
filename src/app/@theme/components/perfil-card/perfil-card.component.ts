@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../modelos/genericos/usuario.model';
-import { UsuarioService } from '../../../servicios/generico/usuario.service';
+import { AutenticacionService } from '../../../servicios/Autenticacion/autenticacion.service';
+
 
 @Component({
   selector: 'ngx-perfil-card',
@@ -9,10 +10,9 @@ import { UsuarioService } from '../../../servicios/generico/usuario.service';
 })
 export class PerfilCardComponent {
   datosUsuario:Usuario;
-  constructor(private usuarioService:UsuarioService) { 
-    usuarioService.obtenerDatosUsuario().subscribe((data:Usuario)=>{
-      this.datosUsuario=data;
-    });    
+  constructor(private autenticacionService:AutenticacionService) { 
+     
+    this.datosUsuario =autenticacionService.usuarioAutenticado;
   }
 
  

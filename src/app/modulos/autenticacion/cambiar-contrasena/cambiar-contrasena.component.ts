@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RespuestaBase } from '../../../modelos/genericos/respuesta-base.model';
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../../servicios/auth/login.service';
-import { UsuarioService } from '../../../servicios/generico/usuario.service';
+
+
 import { Usuario } from '../../../modelos/genericos/usuario.model';
-import { AlertaService } from '../../../servicios/generico/alerta.service';
+import { AlertaService } from '../../../genericos/servicios/alerta.service';
+import { AutenticacionService } from '../../../servicios/Autenticacion/autenticacion.service';
 
 @Component({
   selector: 'ngx-cambiar-contrasena',
@@ -21,9 +22,8 @@ export class CambiarContrasenaComponent implements OnInit {
   datosUsuario: Usuario;
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private router: Router,
-    private usuarioService: UsuarioService,
+    private autService:AutenticacionService,
+    private router: Router,    
     private alerta: AlertaService,
     private route: ActivatedRoute) {
     this.cambioContrasenaForm = this.formBuilder.group({
@@ -34,16 +34,15 @@ export class CambiarContrasenaComponent implements OnInit {
     }, { validator: this.confirmarContrasena });
   }
   ngOnInit() {
-    this.usuarioService.obtenerDatosUsuario().subscribe((data: Usuario) => {
-      this.datosUsuario = data;      
-      this.cambioContrasenaForm.controls.usuario.setValue(data.EmpleadoUsuario.split("_")[0]);
-    });
+    
+    this.datosUsuario = this.autService.usuarioAutenticado; 
+    this.cambioContrasenaForm.controls.usuario.setValue(this.datosUsuario.empleadoUsuario.split("_")[0]);
   }
   cambiarContrasena() {
     if (this.cambioContrasenaForm.invalid) {
       return false;
     }
-    this.loginService.cambiarContrasena(
+    this.autService.cambiarContrasena(
       this.cambioContrasenaForm.controls.usuario.value,
       this.cambioContrasenaForm.controls.contrasenaActual.value,
       this.cambioContrasenaForm.controls.contrasenaNueva.value).subscribe(
@@ -51,7 +50,7 @@ export class CambiarContrasenaComponent implements OnInit {
           this.respuesta = data;
           if (this.respuesta.exito) {
             this.cambioContrasenaForm.reset();
-            this.cambioContrasenaForm.controls.usuario.setValue( this.datosUsuario.EmpleadoUsuario.split("_")[0]);
+            this.cambioContrasenaForm.controls.usuario.setValue( this.datosUsuario.empleadoUsuario.split("_")[0]);
             this.alerta.correcto(this.respuesta.mensaje)
           } else {
            
@@ -72,7 +71,7 @@ export class CambiarContrasenaComponent implements OnInit {
     if (rutaRetornar)
       this.router.navigate([rutaRetornar]);
     else
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/autentiacion/iniciar-sesion']);
   }
 }
 

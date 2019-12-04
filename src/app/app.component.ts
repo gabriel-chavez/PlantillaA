@@ -9,23 +9,8 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 
 @Component({
   selector: 'ngx-app',
-  template: `
-            <!--<ngx-spinner
-            name="spcargando"
-            type = "ball-spin-clockwise-fade"
-            bdColor = "#e2e0e0cc"
-            color = "#124c8c"
-            size = "medium"
-            [fullScreen] = "true"            
-            style="margin-top:-50px"
-            >
-            
-            <div class="text-center">
-              <div style="color: #124c8c"><b>Estamos procesando su solicitud.</b></div>
-              <div style="color: #f8981f"><b>Espere un momento por favor.</b></div>
-            </div>            
-            </ngx-spinner>-->
-            <!--<uv-pantalla-cargando></uv-pantalla-cargando>-->
+  template: `       
+            <uv-pantalla-cargando></uv-pantalla-cargando>
             <router-outlet></router-outlet>            
             `,
   styleUrls: ['./app.component.scss'],

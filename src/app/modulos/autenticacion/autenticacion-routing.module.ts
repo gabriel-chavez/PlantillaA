@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
+import { AutenticacionComponent } from './autenticacion.component';
 import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 import { ValidarAutenticacion } from '../../genericos/guards/validar-autenticacion.guard';
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 
 
 
@@ -11,10 +11,10 @@ import { ValidarAutenticacion } from '../../genericos/guards/validar-autenticaci
 const routes: Routes = [
   {
     path: '',
-    component: AuthComponent,
+    component: AutenticacionComponent,
     children: [{
-      path: 'login',
-      component: LoginComponent
+      path: 'iniciar-sesion',
+      component: IniciarSesionComponent
     },
     {
       path: 'cambiar-contrasena',
@@ -28,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class AutenticacionRoutingModule { }

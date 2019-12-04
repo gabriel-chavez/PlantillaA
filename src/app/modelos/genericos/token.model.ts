@@ -1,5 +1,5 @@
 export class Token {
-    tokenAcceso: string;
-    codigoActualizacion: number;
+    TokenAcceso: string;
+    CodigoActualizacion: string;
   }
   
