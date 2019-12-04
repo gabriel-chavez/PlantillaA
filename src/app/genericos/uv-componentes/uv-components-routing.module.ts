@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VariosComponent } from './varios.component';
+
 import { NoEncontradoComponent } from './no-encontrado/no-encontrado.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: VariosComponent,
+    component: NoEncontradoComponent,
     children: [
       {
         path: '404',
@@ -21,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class VariosRoutingModule { }
+export class UvComponentsRoutingModule { }

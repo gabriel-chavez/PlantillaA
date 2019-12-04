@@ -3,7 +3,8 @@ import { ModulosComponent } from './modulos.component';
 import { ModulosRoutingModule } from './modulos-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { NbMenuModule } from '@nebular/theme';
-import { VariosModule } from './varios/varios.module';
+import { UvComponentsModule } from '../genericos/uv-componentes/uv-components.module';
+//import { VariosModule } from './varios/varios.module';
 
 
 
@@ -14,8 +15,10 @@ import { VariosModule } from './varios/varios.module';
     ModulosRoutingModule,
     ThemeModule,
     NbMenuModule,
-    VariosModule,
-    
+   // VariosModule,
+   
+   
+   UvComponentsModule
   ],
   declarations: [
     ModulosComponent,

@@ -5,7 +5,7 @@ import { AutenticacionRoutingModule } from './autenticacion-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NebularModule } from '../../nebular.module';
 import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
-import { VariosModule } from '../varios/varios.module';
+//import { VariosModule } from '../varios/varios.module';
 import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
 
 
@@ -15,7 +15,7 @@ import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.componen
         NebularModule,
         FormsModule,
         ReactiveFormsModule,
-        VariosModule
+       // VariosModule
     ],
     declarations: [
         AutenticacionComponent,

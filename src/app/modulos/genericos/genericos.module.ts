@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { GenericosRoutingModule } from './genericos-routing.module';
 import { BusquedaVehiculoComponent } from './busqueda-vehiculo/busqueda-vehiculo.component';
 import { NebularModule } from '../../nebular.module';
-import { VariosModule } from '../varios/varios.module';
+import { UvComponentsModule } from '../../genericos/uv-componentes/uv-components.module';
+//import { VariosModule } from '../varios/varios.module';
 
 
 
@@ -15,7 +16,8 @@ import { VariosModule } from '../varios/varios.module';
     CommonModule,
     GenericosRoutingModule,
     NebularModule,
-    VariosModule
+  //  VariosModule
+  UvComponentsModule
   ],
   exports:[BusquedaVehiculoComponent],
  

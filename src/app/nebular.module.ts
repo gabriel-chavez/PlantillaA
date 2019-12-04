@@ -18,7 +18,9 @@ import {
 } from '@nebular/theme';
 import { ThemeModule } from './@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 const NEBULAR_COMPONENTS = [
+  
   ThemeModule,
   NbActionsModule,
   NbButtonModule,
@@ -34,7 +36,9 @@ const NEBULAR_COMPONENTS = [
   NbAlertModule,
   Ng2SmartTableModule,
   NbContextMenuModule,
-  NbTooltipModule
+  NbTooltipModule,
+  
+
 ]
 @NgModule({
   imports: [    

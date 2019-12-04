@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'ngx-no-encontrado',
+  selector: 'uv-no-encontrado',
   styleUrls: ['./no-encontrado.component.scss'],
   templateUrl: './no-encontrado.component.html'
 })
